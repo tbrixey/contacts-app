@@ -35,7 +35,6 @@ module.exports = {
             "never"
         ],
         "spaced-comment":     [2, "always" ],
-        "vars-on-top":        2,
         "no-undef":           2,
         "no-undefined":       2,
         "comma-dangle":       [ 2, "always-multiline" ],

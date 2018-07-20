@@ -1,8 +1,21 @@
 import React from 'react';
 import firebase from 'firebase';
-import styled, { css } from 'react-emotion';
-import MainHeader from './header';
-import ContactList from './contactlist';
+import styled from 'react-emotion';
+import MainApp from './main';
+import { Login, Register } from './authentication';
+
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+
+var config = {
+  apiKey: 'AIzaSyBFSZ9zG2LOLoILA2ennm4I7lKnQM6bL00',
+  authDomain: 'cremacontacts.firebaseapp.com',
+  databaseURL: 'https://cremacontacts.firebaseio.com',
+  projectId: 'cremacontacts',
+  storageBucket: 'cremacontacts.appspot.com',
+  messagingSenderId: '94202641228',
+};
+
+firebase.initializeApp(config);
 
 const AppContainer = styled('div')`
   text-align: center;
@@ -20,20 +33,16 @@ const AppContainer = styled('div')`
   }
 `;
 
-const config = {
-  apiKey: 'AIzaSyBFSZ9zG2LOLoILA2ennm4I7lKnQM6bL00',
-  authDomain: 'cremacontacts.firebaseapp.com',
-  databaseURL: 'https://cremacontacts.firebaseio.com',
-  storageBucket: 'cremacontacts.appspot.com',
-};
-
-firebase.initializeApp(config);
-
 const App = () => {
   return (
     <AppContainer className="App">
-      <MainHeader />
-      <ContactList />
+      <Router>
+        <Switch>
+          <Route path="/" exact component={MainApp} />
+          <Route path="/login" component={Login} />
+          <Route path="/register" component={Register} />
+        </Switch>
+      </Router>
     </AppContainer>
   );
 };

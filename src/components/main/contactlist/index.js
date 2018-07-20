@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import styled, { css } from 'react-emotion';
+import styled from 'react-emotion';
 
 const Container = styled('div')`
   margin-top: 0.5em;
