@@ -1,15 +1,2 @@
-import React, { Component } from 'react';
-import Login from './Login.jsx';
-import Register from './Register.jsx';
-
-class Authentication extends Component {
-
-  render() {
-    return (
-      <div className="Authentication"></div>
-    );
-  }
-
-}
-
-export default Authentication;
+export { default as Login } from './Login.jsx';
+export { default as Register } from './Register.jsx';
