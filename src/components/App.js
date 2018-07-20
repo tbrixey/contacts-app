@@ -1,6 +1,8 @@
 import React from 'react';
 import firebase from 'firebase';
 import styled, { css } from 'react-emotion';
+import MainHeader from './header';
+import ContactList from './contactlist';
 
 const AppContainer = styled('div')`
   text-align: center;
@@ -18,16 +20,6 @@ const AppContainer = styled('div')`
   }
 `;
 
-const Header = styled('div')`
-  background-color: #222;
-  height: 5.75em;
-  color: white;
-`;
-
-const MainHeader = styled('h1')`
-  display: inline-block;
-`;
-
 const config = {
   apiKey: 'AIzaSyBFSZ9zG2LOLoILA2ennm4I7lKnQM6bL00',
   authDomain: 'cremacontacts.firebaseapp.com',
@@ -35,17 +27,13 @@ const config = {
   storageBucket: 'cremacontacts.appspot.com',
 };
 
-firebase.initializeApp(config.firebase);
+firebase.initializeApp(config);
 
 const App = () => {
   return (
     <AppContainer className="App">
-      <Header>
-        <MainHeader>Contacts</MainHeader>
-      </Header>
-      <p className="App-intro">
-        rest of the stuff is going to go here probably
-      </p>
+      <MainHeader />
+      <ContactList />
     </AppContainer>
   );
 };
