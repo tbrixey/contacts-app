@@ -3,9 +3,9 @@ import ContactList from './contactlist';
 import Header from './header';
 import firebase from '../helpers/FirebaseInit';
 
-var fireStoreDB = firebase.firestore();
+var firestoreDB = firebase.firestore();
 const settings = {timestampsInSnapshots: true};
-fireStoreDB.settings(settings);
+firestoreDB.settings(settings);
 
 class MainApp extends Component {
   constructor(props) {
@@ -49,7 +49,7 @@ class MainApp extends Component {
           signOut={this.signOut}
         />
         <ContactList
-          fireStoreDB={fireStoreDB}
+          firestoreDB={firestoreDB}
           user={this.state.user}
         />
       </div>

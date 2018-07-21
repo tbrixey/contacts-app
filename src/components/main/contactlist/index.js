@@ -37,7 +37,7 @@ class ContactList extends Component {
   componentDidUpdate(prevProps, prevState) {
     if (prevProps !== this.props) {
       if (this.props.user.uid) {
-        const docRef = this.props.fireStoreDB.collection('users').doc(this.props.user.uid);
+        const docRef = this.props.firestoreDB.collection('users').doc(this.props.user.uid);
 
         docRef.get().then((doc) => {
           if (doc.exists) {
@@ -70,6 +70,7 @@ class ContactList extends Component {
             <AddButton>
               <AddContact
                 user={this.props.user}
+                firestoreDB={this.props.firestoreDB}
               />
             </AddButton>
           </div>
@@ -87,6 +88,6 @@ class ContactList extends Component {
 export default ContactList;
 
 ContactList.propTypes = {
-  fireStoreDB: PropTypes.object,
+  firestoreDB: PropTypes.object,
   user: PropTypes.object,
 };

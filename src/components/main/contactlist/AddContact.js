@@ -2,6 +2,7 @@ import React from 'react';
 import Button from '@material-ui/core/Button';
 import AddIcon from '@material-ui/icons/Add';
 import styled from 'react-emotion';
+import PropTypes from 'prop-types';
 
 const MyButton = styled(Button)`
   width: 10em;
@@ -20,6 +21,8 @@ const MyButton = styled(Button)`
   }
 `;
 
+
+
 const AddContact = () => (
   <MyButton variant='extendedFab' color="primary" aria-label="Add">
     <AddIcon />
@@ -28,3 +31,8 @@ const AddContact = () => (
 );
 
 export default AddContact;
+
+AddContact.propTypes = {
+  user: PropTypes.object,
+  firestoreDB: PropTypes.object,
+};
