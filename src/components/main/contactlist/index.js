@@ -4,8 +4,10 @@ import PropTypes from 'prop-types';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
-import AddContact from './AddContact';
+import Delete from '@material-ui/icons/Delete';
+import AddContactButton from './AddContactButton';
 import Modal from '@material-ui/core/Modal';
+import AddContact from './AddContact';
 
 const Container = styled('div')`
   margin-top: 0.5em;
@@ -35,12 +37,12 @@ const ModalStyle = styled('div')`
   background-color: #fff;
   box-shadow: 2px 2px 10px;
   width: 50%;
-  height: 60%;
+  height: 70%;
   font-size: 26px;
 
   @media only screen and (max-width: 1024px) {
     width: 70%;
-    height: 60%;
+    height: 65%;
     font-size: 22px;
   }
 `;
@@ -65,21 +67,40 @@ class ContactList extends Component {
     };
   }
 
+  reQueryContacts = () => {
+    const docRef = this.props.firestoreDB.collection('users').doc(this.props.user.uid).collection('contactlist');
+    let dataArr = [];
+    docRef.get().then((querySnapshot) => {
+      querySnapshot.forEach((doc) => {
+          if (doc.exists) {
+            let dataObj = doc.data();
+            dataObj.docId = doc.id;
+            dataArr.push(dataObj);
+            this.setState({contactList: dataArr});
+          }
+      });
+    }).catch(function(error) {
+      console.error('Error getting document:', error);
+    });
+  }
+
   componentDidUpdate(prevProps, prevState) {
     if (prevProps !== this.props) {
       if (this.props.user.uid) {
-        const docRef = this.props.firestoreDB.collection('users').doc(this.props.user.uid);
-
-        docRef.get().then((doc) => {
-          if (doc.exists) {
-            const data = doc.data();
-            this.setState({contactList: data.ContactList});
-          }
-        }).catch(function(error) {
-          alert('Error getting document:', error);
-        });
+        this.reQueryContacts();
       }
     }
+  }
+
+  removeContact = (contact) => {
+    console.log(contact);
+    const docRef = this.props.firestoreDB.collection('users').doc(this.props.user.uid).collection('contactlist').doc(contact.docId);
+    docRef.delete().then(() => {
+      console.log('Gone forever!');
+      this.reQueryContacts();
+    }).catch((error) => {
+      console.error('error removing document: ', error);
+    });
   }
 
   changeContactModalVis = () => {
@@ -87,10 +108,12 @@ class ContactList extends Component {
   }
 
   render() {
+    const { user, firestoreDB } = this.props;
     const contactMap = this.state.contactList.map((contact, idx) => {
       return (
           <MyListItem key={idx}>
             {contact.FirstName} {contact.LastName}
+            <Delete onClick={() => this.removeContact(contact)} style={{ position: 'absolute', right: '1em', color: 'red' }}/>
           </MyListItem>
       );
     });
@@ -103,18 +126,24 @@ class ContactList extends Component {
               {contactMap}
             </MyList>
             <AddButton>
-              <AddContact
+              <AddContactButton
                 changeContactModalVis={this.changeContactModalVis}
               />
             </AddButton>
             <Modal
-              aria-labelledby="simple-modal-title"
-              aria-describedby="simple-modal-description"
               open={this.state.addContactModalVis}
               onClose={this.changeContactModalVis}
             >
               <ModalStyle>
-                <ModalHeader><ModalHeaderText>Add Contact</ModalHeaderText></ModalHeader>
+                <ModalHeader>
+                  <ModalHeaderText>Add Contact</ModalHeaderText>
+                </ModalHeader>
+                <AddContact
+                  closeModal={this.changeContactModalVis}
+                  user={user}
+                  firestoreDB={firestoreDB}
+                  reQueryContact={this.reQueryContacts}
+                />
               </ModalStyle>
             </Modal>
           </div>
