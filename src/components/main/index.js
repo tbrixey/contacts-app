@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import ContactList from './contactlist';
 import Header from './header';
-import firebase from 'firebase';
+import firebase from '../helpers/FirebaseInit';
+
+var fireStoreDB = firebase.firestore();
 
 class MainApp extends Component {
   constructor(props) {
@@ -28,6 +30,7 @@ class MainApp extends Component {
         // User is signed in.
         user.email = authUser.email;
         user.emailVerified = authUser.emailVerified;
+        user.uid = authUser.uid;
         this.setState({ user });
         // ...
       } else {
@@ -43,7 +46,9 @@ class MainApp extends Component {
           user={this.state.user}
           signOut={this.signOut}
         />
-        <ContactList />
+        <ContactList
+          fireStoreDB={fireStoreDB}
+        />
       </div>
     );
 

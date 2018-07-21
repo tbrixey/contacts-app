@@ -13,6 +13,10 @@ class ContactList extends Component {
     };
   }
 
+  componentDidMount() {
+
+  }
+
   render() {
     return (
       <Container>
