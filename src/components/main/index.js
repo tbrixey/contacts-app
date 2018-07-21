@@ -4,6 +4,8 @@ import Header from './header';
 import firebase from '../helpers/FirebaseInit';
 
 var fireStoreDB = firebase.firestore();
+const settings = {timestampsInSnapshots: true};
+fireStoreDB.settings(settings);
 
 class MainApp extends Component {
   constructor(props) {
@@ -48,6 +50,7 @@ class MainApp extends Component {
         />
         <ContactList
           fireStoreDB={fireStoreDB}
+          user={this.state.user}
         />
       </div>
     );

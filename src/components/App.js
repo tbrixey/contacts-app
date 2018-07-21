@@ -16,14 +16,14 @@ const AppContainer = styled('div')`
     font-size: 20px;
   }
 
-  @media only screen and (max-width: 768px) {
+  @media only screen and (max-width: 760px) {
     font-size: 14px;
   }
 `;
 
 const App = () => {
   return (
-    <AppContainer className="App">
+    <AppContainer style={{ height: '100vh', overflowX: 'hidden' }}>
       <Router>
         <Switch>
           <Route path="/" exact component={MainApp} />
