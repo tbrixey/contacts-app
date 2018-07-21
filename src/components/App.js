@@ -1,21 +1,9 @@
 import React from 'react';
-import firebase from 'firebase';
 import styled from 'react-emotion';
 import MainApp from './main';
 import { Login, Register } from './authentication';
 
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-
-var config = {
-  apiKey: 'AIzaSyBFSZ9zG2LOLoILA2ennm4I7lKnQM6bL00',
-  authDomain: 'cremacontacts.firebaseapp.com',
-  databaseURL: 'https://cremacontacts.firebaseio.com',
-  projectId: 'cremacontacts',
-  storageBucket: 'cremacontacts.appspot.com',
-  messagingSenderId: '94202641228',
-};
-
-firebase.initializeApp(config);
 
 const AppContainer = styled('div')`
   text-align: center;
@@ -28,14 +16,14 @@ const AppContainer = styled('div')`
     font-size: 20px;
   }
 
-  @media only screen and (max-width: 768px) {
+  @media only screen and (max-width: 760px) {
     font-size: 14px;
   }
 `;
 
 const App = () => {
   return (
-    <AppContainer className="App">
+    <AppContainer style={{ height: '100vh', overflowX: 'hidden' }}>
       <Router>
         <Switch>
           <Route path="/" exact component={MainApp} />

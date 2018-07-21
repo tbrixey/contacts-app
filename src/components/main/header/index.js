@@ -36,7 +36,6 @@ class MainHeader extends Component {
 
   render(){
     const { user, signOut } = this.props;
-    console.log(user);
     return (
       <Header>
         <h1 style={{ margin: '0.2em 0 0.8em' }}>Contacts</h1>
