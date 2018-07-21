@@ -15,7 +15,7 @@ const MyLinks = styled(Link)`
 
 const Header = styled('div')`
   background-color: #222;
-  height: 5.75em;
+  height: 5em;
   width: 100%;
   color: white;
   display: inline-block;
@@ -39,19 +39,18 @@ class MainHeader extends Component {
     console.log(user);
     return (
       <Header>
-        <h1>Contacts</h1>
+        <h1 style={{ margin: '0.2em 0 0.8em' }}>Contacts</h1>
         <Grid container spacing={24}>
-          <MyGrid item xs={4}>
-            <div>Contacts</div>
+          <MyGrid item xs={2}>
           </MyGrid>
-          <MyGrid item xs={4}>
-          </MyGrid>
-          <MyGrid item xs={4}>
+          <MyGrid item xs={8}>
             {
               user.email
               ? <SignOutText onClick={signOut}>{user.email} (Sign Out)</SignOutText>
               : <MyLinks to='/login'><div>Login/Register</div></MyLinks>
             }
+          </MyGrid>
+          <MyGrid item xs={2}>
           </MyGrid>
         </Grid>
       </Header>
