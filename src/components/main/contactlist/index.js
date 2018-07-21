@@ -15,7 +15,7 @@ const Container = styled('div')`
 
 const MyList = styled(List)`
   width: 50%;
-  margin: 0.5em auto;
+  margin: 0.5em auto !important;
 `;
 
 const MyListItem = styled(ListItem)`
