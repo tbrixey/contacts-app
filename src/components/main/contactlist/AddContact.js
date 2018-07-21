@@ -21,18 +21,18 @@ const MyButton = styled(Button)`
   }
 `;
 
+const AddContact = ({changeContactModalVis}) => {
 
-
-const AddContact = () => (
-  <MyButton variant='extendedFab' color="primary" aria-label="Add">
-    <AddIcon />
-    Add Contact
-  </MyButton>
-);
+  return (
+    <MyButton variant='extendedFab' color="primary" aria-label="Add" onClick={changeContactModalVis}>
+      <AddIcon />
+      Add Contact
+    </MyButton>
+  );
+};
 
 export default AddContact;
 
 AddContact.propTypes = {
-  user: PropTypes.object,
-  firestoreDB: PropTypes.object,
+  changeContactModalVis: PropTypes.func,
 };

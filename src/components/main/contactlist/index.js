@@ -5,6 +5,7 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import AddContact from './AddContact';
+import Modal from '@material-ui/core/Modal';
 
 const Container = styled('div')`
   margin-top: 0.5em;
@@ -26,11 +27,41 @@ const AddButton = styled('div')`
   right: 1em;
 `;
 
+const ModalStyle = styled('div')`
+  top: 50%;
+  left: 50%;
+  position: fixed;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  box-shadow: 2px 2px 10px;
+  width: 50%;
+  height: 60%;
+  font-size: 26px;
+
+  @media only screen and (max-width: 1024px) {
+    width: 70%;
+    height: 60%;
+    font-size: 22px;
+  }
+`;
+
+const ModalHeader = styled('div')`
+  height: 3em;
+  background-color: #bfbfbf;
+`;
+
+const ModalHeaderText = styled('span')`
+  position: relative;
+  top: 0.9em;
+  left: 1.8em;
+`;
+
 class ContactList extends Component {
   constructor(props) {
     super(props);
     this.state = {
       contactList: [],
+      addContactModalVis: false,
     };
   }
 
@@ -51,6 +82,10 @@ class ContactList extends Component {
     }
   }
 
+  changeContactModalVis = () => {
+    this.setState({addContactModalVis: !this.state.addContactModalVis});
+  }
+
   render() {
     const contactMap = this.state.contactList.map((contact, idx) => {
       return (
@@ -69,10 +104,19 @@ class ContactList extends Component {
             </MyList>
             <AddButton>
               <AddContact
-                user={this.props.user}
-                firestoreDB={this.props.firestoreDB}
+                changeContactModalVis={this.changeContactModalVis}
               />
             </AddButton>
+            <Modal
+              aria-labelledby="simple-modal-title"
+              aria-describedby="simple-modal-description"
+              open={this.state.addContactModalVis}
+              onClose={this.changeContactModalVis}
+            >
+              <ModalStyle>
+                <ModalHeader><ModalHeaderText>Add Contact</ModalHeaderText></ModalHeader>
+              </ModalStyle>
+            </Modal>
           </div>
           :
           <div style={{ marginTop: '10em' }}>
