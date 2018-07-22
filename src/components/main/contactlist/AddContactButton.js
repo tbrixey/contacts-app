@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 
 const MyButton = styled(Button)`
   width: 10em;
-  height: 4em;
+  height: 3.5em;
 
   @media only screen and (min-width: 1024px) {
     font-size: 16px;

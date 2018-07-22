@@ -21,12 +21,28 @@ const MyList = styled(List)`
 const MyListItem = styled(ListItem)`
   padding-top: 0.4em;
   padding-bottom: 0.4em;
+
+  &:hover {
+    background-color: rgba(125, 125, 125, 0.1)
+  }
 `;
 
 const AddButton = styled('div')`
   position: fixed;
   bottom: 1em;
   right: 1em;
+`;
+
+const TrashCan = styled(Delete)`
+  position: absolute;
+  right: 1em;
+  color: red;
+  transition: transform .1s;
+
+  &:hover {
+    transform: scale(1.1);
+  }
+
 `;
 
 const ModalStyle = styled('div')`
@@ -42,7 +58,7 @@ const ModalStyle = styled('div')`
 
   @media only screen and (max-width: 1024px) {
     width: 70%;
-    height: 65%;
+    height: 80%;
     font-size: 22px;
   }
 `;
@@ -57,6 +73,14 @@ const ModalHeaderText = styled('span')`
   top: 0.9em;
   left: 1.8em;
 `;
+
+const sortFirstName = (a,b) => {
+  if (a.FirstName > b.FirstName)
+    return 1;
+  if (a.FirstName < b.FirstName)
+    return -1;
+  return 0;
+};
 
 class ContactList extends Component {
   constructor(props) {
@@ -76,9 +100,10 @@ class ContactList extends Component {
             let dataObj = doc.data();
             dataObj.docId = doc.id;
             dataArr.push(dataObj);
-            this.setState({contactList: dataArr});
           }
       });
+      dataArr = dataArr.sort(sortFirstName);
+      this.setState({contactList: dataArr});
     }).catch(function(error) {
       console.error('Error getting document:', error);
     });
@@ -113,7 +138,7 @@ class ContactList extends Component {
       return (
           <MyListItem key={idx}>
             {contact.FirstName} {contact.LastName}
-            <Delete onClick={() => this.removeContact(contact)} style={{ position: 'absolute', right: '1em', color: 'red' }}/>
+            <TrashCan onClick={() => this.removeContact(contact)}/>
           </MyListItem>
       );
     });
