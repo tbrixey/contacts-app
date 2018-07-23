@@ -38,7 +38,7 @@ class MainHeader extends Component {
     const { user, signOut } = this.props;
     return (
       <Header>
-        <h1 style={{ margin: '0.2em 0 0.8em' }}>Contacts</h1>
+        <h1 style={{ margin: '0.2em 0 0.6em' }}>Contacts</h1>
         <Grid container spacing={24}>
           <MyGrid item xs={2}>
           </MyGrid>
