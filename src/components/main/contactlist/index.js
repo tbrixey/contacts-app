@@ -20,9 +20,8 @@ const MyList = styled(List)`
 `;
 
 const MyListItem = styled(ListItem)`
-  padding-top: 0.4em;
-  padding-bottom: 0.4em;
-
+  padding: 0;
+  height: 2em;
   &:hover {
     background-color: rgba(125, 125, 125, 0.1)
   }
@@ -36,7 +35,7 @@ const AddButton = styled('div')`
 
 const TrashCan = styled(Delete)`
   position: absolute;
-  right: 1em;
+  right: 0.7em;
   color: red;
   transition: transform .1s;
 
@@ -149,7 +148,12 @@ class ContactList extends Component {
     const contactMap = this.state.contactList.map((contact, idx) => {
       return (
         <MyListItem key={idx}>
-          <div onClick={() => this.setContactDetail(contact)} style={{width: '100%'}}>{contact.FirstName} {contact.LastName}</div>
+          <div
+            onClick={() => this.setContactDetail(contact)}
+            style={{width: '100%', height: '100%'}}
+            >
+              <span style={{position: 'relative', top: '0.4em', left: '0.4em'}}>{contact.FirstName} {contact.LastName}</span>
+          </div>
           <TrashCan onClick={() => this.removeContact(contact)}/>
         </MyListItem>
       );
