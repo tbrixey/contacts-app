@@ -65,7 +65,8 @@ const ModalStyle = styled('div')`
 
 const ModalHeader = styled('div')`
   height: 3em;
-  background-color: #bfbfbf;
+  background-color: #97C34D;
+  color: #343826;
 `;
 
 const ModalHeaderText = styled('span')`
