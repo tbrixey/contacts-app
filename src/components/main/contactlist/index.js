@@ -160,7 +160,7 @@ class ContactList extends Component {
     });
     return (
       <Container>
-        { this.state.contactList.length > 0
+        { this.props.user.uid
           ?
           <div>
             <MyList >
