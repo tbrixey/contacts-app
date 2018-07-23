@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled from 'react-emotion';
+import styled, { css } from 'react-emotion';
 import { Formik } from 'formik';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
@@ -263,7 +263,6 @@ const MyInnerForm = ({ props, closeModal }) => {
       </div>
       <div style={{position: 'absolute', bottom: '0.5em', right: '0.5em'}}>
         <Button type="button"
-        className="outline"
         onClick={closeModal}
         variant="contained"
         style={{marginRight: '1em'}}
@@ -272,7 +271,13 @@ const MyInnerForm = ({ props, closeModal }) => {
         </Button>
         <Button
           variant="contained"
-          color="primary"
+          className={css`
+            background-color: rgba(52, 56, 38);
+            color: white;
+            &:hover {
+              background-color: rgba(52, 56, 38, 0.8);
+            }
+          `}
           type="submit"
           disabled={isSubmitting}
         >

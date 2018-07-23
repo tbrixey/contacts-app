@@ -10,19 +10,20 @@ const MyGrid = styled(Grid)`
 
 const MyLinks = styled(Link)`
   text-decoration: none;
-  color: white;
+  color: #343826;
 `;
 
 const Header = styled('div')`
-  background-color: #222;
+  background-color: #97C34D;
   height: 5em;
   width: 100%;
-  color: white;
+  color: #343826;
   display: inline-block;
 `;
 
 const SignOutText = styled('div')`
   cursor: pointer;
+  color: #343826;
 `;
 
 // This had to be a statefull vs stateless so props would update correctly
