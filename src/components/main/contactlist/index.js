@@ -8,6 +8,7 @@ import Delete from '@material-ui/icons/Delete';
 import AddContactButton from './AddContactButton';
 import Modal from '@material-ui/core/Modal';
 import AddContact from './AddContact';
+import ViewContact from './ViewContact';
 
 const Container = styled('div')`
   margin-top: 0.5em;
@@ -87,7 +88,9 @@ class ContactList extends Component {
     super(props);
     this.state = {
       contactList: [],
+      contactDetail: {},
       addContactModalVis: false,
+      viewContactModal: false,
     };
   }
 
@@ -132,14 +135,23 @@ class ContactList extends Component {
     this.setState({addContactModalVis: !this.state.addContactModalVis});
   }
 
+  changeContactDetailModalVis = () => {
+    this.setState({viewContactModal: !this.state.viewContactModal});
+  }
+
+  setContactDetail = (contact) => {
+    this.setState({contactDetail: contact});
+    this.changeContactDetailModalVis();
+  }
+
   render() {
     const { user, firestoreDB } = this.props;
     const contactMap = this.state.contactList.map((contact, idx) => {
       return (
-          <MyListItem key={idx}>
-            {contact.FirstName} {contact.LastName}
-            <TrashCan onClick={() => this.removeContact(contact)}/>
-          </MyListItem>
+        <MyListItem key={idx}>
+          <div onClick={() => this.setContactDetail(contact)} style={{width: '100%'}}>{contact.FirstName} {contact.LastName}</div>
+          <TrashCan onClick={() => this.removeContact(contact)}/>
+        </MyListItem>
       );
     });
     return (
@@ -171,6 +183,11 @@ class ContactList extends Component {
                 />
               </ModalStyle>
             </Modal>
+            <ViewContact
+              contactDetail={this.state.contactDetail}
+              viewContactModal={this.state.viewContactModal}
+              changeContactDetailModalVis={this.changeContactDetailModalVis}
+            />
           </div>
           :
           <div style={{ marginTop: '10em' }}>

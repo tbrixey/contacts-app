@@ -85,20 +85,36 @@ const MyInnerForm = ({ props, closeModal }) => {
           touched.LastName && <FeedbackText className="input-feedback">{errors.LastName}</FeedbackText>}
         </ItemContainer>
         <ItemContainer>
-          <ItemLabel htmlFor="PhoneNumber">
-            Phone Number:
+          <ItemLabel htmlFor="WorkPhoneNumber">
+            Work Number:
           </ItemLabel>
           <TextField
-            id="PhoneNumber"
+            id="WorkPhoneNumber"
             placeholder="1234567890"
             type="number"
-            value={(values.PhoneNumber)}
+            value={(values.WorkPhoneNumber)}
             onChange={handleChange}
             onBlur={handleBlur}
-            className={errors.PhoneNumber && touched.PhoneNumber ? 'text-input error' : 'text-input'}
+            className={errors.WorkPhoneNumber && touched.WorkPhoneNumber ? 'text-input error' : 'text-input'}
           />
-          {errors.PhoneNumber &&
-          touched.PhoneNumber && <FeedbackText className="input-feedback">{errors.PhoneNumber}</FeedbackText>}
+          {errors.WorkPhoneNumber &&
+          touched.WorkPhoneNumber && <FeedbackText className="input-feedback">{errors.WorkPhoneNumber}</FeedbackText>}
+        </ItemContainer>
+        <ItemContainer>
+          <ItemLabel htmlFor="CellPhoneNumber">
+            Cell Number:
+          </ItemLabel>
+          <TextField
+            id="CellPhoneNumber"
+            placeholder="1234567890"
+            type="number"
+            value={(values.CellPhoneNumber)}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            className={errors.CellPhoneNumber && touched.CellPhoneNumber ? 'text-input error' : 'text-input'}
+          />
+          {errors.CellPhoneNumber &&
+          touched.CellPhoneNumber && <FeedbackText className="input-feedback">{errors.CellPhoneNumber}</FeedbackText>}
         </ItemContainer>
         <ItemContainer>
           <ItemLabel htmlFor="EmailAddress">
@@ -228,6 +244,22 @@ const MyInnerForm = ({ props, closeModal }) => {
           {errors.POBox &&
           touched.POBox && <FeedbackText className="input-feedback">{errors.POBox}</FeedbackText>}
         </ItemContainer>
+        <ItemContainer>
+          <ItemLabel htmlFor="Notes">
+            Notes:
+          </ItemLabel>
+          <TextField
+            id="Notes"
+            placeholder="Notes"
+            type="text"
+            value={values.Notes}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            className={errors.Notes && touched.Notes ? 'text-input error' : 'text-input'}
+          />
+          {errors.Notes &&
+          touched.Notes && <FeedbackText className="input-feedback">{errors.Notes}</FeedbackText>}
+        </ItemContainer>
       </div>
       <div style={{position: 'absolute', bottom: '0.5em', right: '0.5em'}}>
         <Button type="button"
@@ -262,7 +294,8 @@ const AddContact = ({ closeModal, user, firestoreDB, reQueryContact }) => {
         FirstName: '',
         MiddleName: '',
         LastName: '',
-        PhoneNumber: '',
+        WorkPhoneNumber: '',
+        CellPhoneNumber: '',
         EmailAddress: '',
         Nickname: '',
         StreetAddress: '',
@@ -271,11 +304,14 @@ const AddContact = ({ closeModal, user, firestoreDB, reQueryContact }) => {
         State: '',
         ZIPCode: '',
         POBox: '',
+        Notes: '',
       }}
       onSubmit={(values, actions) => {
         setTimeout(() => {
-          let newPhoneNumber = values.PhoneNumber.toString().replace(/(\d{3})(\d{3})(\d{4})/, '($1)-$2-$3');
-          values.PhoneNumber = newPhoneNumber;
+          let newWorkPhoneNumber = values.WorkPhoneNumber.toString().replace(/(\d{3})(\d{3})(\d{4})/, '($1)-$2-$3');
+          let newCellPhoneNumber = values.CellPhoneNumber.toString().replace(/(\d{3})(\d{3})(\d{4})/, '($1)-$2-$3');
+          values.WorkPhoneNumber = newWorkPhoneNumber;
+          values.CellPhoneNumber = newCellPhoneNumber;
           firestoreDB.collection('users').doc(user.uid).collection('contactlist').add(values)
           .then(function(docRef) {
               console.log('Document successfully written!', docRef.id);
