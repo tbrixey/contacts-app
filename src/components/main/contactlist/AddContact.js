@@ -2,9 +2,76 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'react-emotion';
 import { Formik } from 'formik';
-import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import * as Yup from 'yup';
+
+const MyAddButton = styled('button')`
+  width: 5.5em;
+  height: 2.8em;
+  background-color: #343826;
+  color: white;
+  box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.2),0px 2px 2px 0px rgba(0, 0, 0, 0.14),0px 3px 1px -2px rgba(0, 0, 0, 0.12);
+  border: none;
+  text-align: center;
+  display: inline-block;
+  border-radius: 6px;
+  font-weight: 600;
+  text-transform: uppercase;
+  cursor: pointer;
+  overflow: hidden;
+  text-decoration: none;
+  position: relative;
+
+  -webkit-transition-duration: 0.2s;
+  transition-duration: 0.2s;
+
+  &:hover {
+    background-color: rgba(52, 56, 38, 0.8);
+  }
+
+  &:after {
+    content: "";
+    background: rgba(190, 190, 190, 1);
+    display: block;
+    position: absolute;
+    padding-top: 300%;
+    padding-left: 350%;
+    margin-left: -20px!important;
+    margin-top: -120%;
+    opacity: 0;
+    transition: all 0.8s
+  }
+
+  &:active:after {
+    padding: 0;
+    margin: 0;
+    opacity: 1;
+    transition: 0s
+  }
+`;
+
+const MyCloseButton = styled('button')`
+  width: 5.5em;
+  height: 2.8em;
+  background-color: #e0e0e0;
+  color: black;
+  box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.2),0px 2px 2px 0px rgba(0, 0, 0, 0.14),0px 3px 1px -2px rgba(0, 0, 0, 0.12);
+  border: none;
+  text-align: center;
+  display: inline-block;
+  border-radius: 6px;
+  font-weight: 600;
+  text-transform: uppercase;
+  cursor: pointer;
+  margin-right: 0.6em;
+
+  -webkit-transition-duration: 0.2s;
+  transition-duration: 0.2s;
+
+  &:hover {
+    background-color: #d5d5d5;
+  }
+`;
 
 const FeedbackText = styled('div')`
   font-size: 12px;
@@ -262,27 +329,17 @@ const MyInnerForm = ({ props, closeModal }) => {
         </ItemContainer>
       </div>
       <div style={{position: 'absolute', bottom: '0.5em', right: '0.5em'}}>
-        <Button type="button"
+        <MyCloseButton type="button"
         onClick={closeModal}
-        variant="contained"
-        style={{marginRight: '1em'}}
         >
           Close
-        </Button>
-        <Button
-          variant="contained"
-          className={css`
-            background-color: rgba(52, 56, 38);
-            color: white;
-            &:hover {
-              background-color: rgba(52, 56, 38, 0.8);
-            }
-          `}
+        </MyCloseButton>
+        <MyAddButton
           type="submit"
           disabled={isSubmitting}
         >
           Add
-        </Button>
+        </MyAddButton>
       </div>
     </form>
   );
