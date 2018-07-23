@@ -5,6 +5,8 @@ import { Login, Register } from './authentication';
 
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
+// Color scheme taken from here https://pigment.shapefactory.co/?a=343826&b=97C34D
+
 const AppContainer = styled('div')`
   text-align: center;
 

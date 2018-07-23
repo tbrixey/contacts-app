@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'react-emotion';
 import PropTypes from 'prop-types';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
 import Delete from '@material-ui/icons/Delete';
 import AddContactButton from './AddContactButton';
 import Modal from '@material-ui/core/Modal';
@@ -14,12 +11,12 @@ const Container = styled('div')`
   margin-top: 0.5em;
 `;
 
-const MyList = styled(List)`
+const MyList = styled('div')`
   width: 50%;
   margin: 0.5em auto !important;
 `;
 
-const MyListItem = styled(ListItem)`
+const MyListItem = styled('div')`
   padding: 0;
   height: 2em;
   &:hover {
@@ -34,8 +31,10 @@ const AddButton = styled('div')`
 `;
 
 const TrashCan = styled(Delete)`
-  position: absolute;
+  position: relative;
   right: 0.7em;
+  top: 0.25em;
+  float: right;
   color: red;
   transition: transform .1s;
 
@@ -151,9 +150,9 @@ class ContactList extends Component {
         <MyListItem key={idx}>
           <div
             onClick={() => this.setContactDetail(contact)}
-            style={{width: '100%', height: '100%'}}
+            style={{width: '100%', height: '100%', display: 'inline'}}
             >
-              <span style={{position: 'relative', top: '0.4em', left: '0.4em'}}>{contact.FirstName} {contact.LastName}</span>
+              <span style={{position: 'relative', top: '0.4em', left: '0.4em', float: 'left'}}>{contact.FirstName} {contact.LastName}</span>
           </div>
           <TrashCan onClick={() => this.removeContact(contact)}/>
         </MyListItem>
