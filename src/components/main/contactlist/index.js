@@ -61,6 +61,7 @@ class ContactList extends Component {
       contactDetail: {},
       addContactModalVis: false,
       viewContactModal: false,
+      userAuthed: false,
     };
   }
 
@@ -85,6 +86,7 @@ class ContactList extends Component {
   componentDidUpdate(prevProps, prevState) {
     if (prevProps !== this.props) {
       if (this.props.user.uid) {
+        this.setState({userAuthed: true});
         this.reQueryContacts();
       }
     }
@@ -152,7 +154,7 @@ class ContactList extends Component {
     });
     return (
       <Container>
-        { this.props.user.uid
+        { this.state.userAuthed
           ?
           <div>
             <label>Search for contact: </label>

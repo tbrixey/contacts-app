@@ -45,7 +45,6 @@ const Details = styled('div')`
 `;
 
 const ViewContact = ({viewContactModal, changeContactDetailModalVis, contactDetail}) => {
-
   return (
     <Modal
       visible={viewContactModal}
