@@ -2,9 +2,11 @@ import React, { Component } from 'react';
 import styled from 'react-emotion';
 import PropTypes from 'prop-types';
 import AddContactButton from './AddContactButton';
-import { Modal, Icon, Popconfirm } from 'antd';
+import { Modal, Icon, Popconfirm, Select } from 'antd';
 import AddContact from './AddContact';
 import ViewContact from './ViewContact';
+
+const Option = Select.Option;
 
 const Container = styled('div')`
   margin-top: 0.5em;
@@ -99,6 +101,18 @@ class ContactList extends Component {
     });
   }
 
+  selectContact = (value) => {
+    let contactDetail;
+    this.state.contactList.forEach((contact) => {
+      if (contact.docId === value) {
+        contactDetail = contact;
+      }
+    });
+
+    this.setState({contactDetail});
+    this.changeContactDetailModalVis();
+  }
+
   changeContactModalVis = () => {
     this.setState({addContactModalVis: !this.state.addContactModalVis});
   }
@@ -129,11 +143,31 @@ class ContactList extends Component {
         </MyListItem>
       );
     });
+
+    const searchMap = this.state.contactList.map((contact, idx) => {
+      const fullName = contact.FirstName + ' ' + contact.LastName;
+      return (
+        <Option key={idx} value={contact.docId}>{fullName}</Option>
+      );
+    });
     return (
       <Container>
         { this.props.user.uid
           ?
           <div>
+            <label>Search for contact: </label>
+            <Select
+              showSearch
+              value={null}
+              defaultActiveFirstOption={false}
+              showArrow={false}
+              filterOption={(input, option) => option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
+              notFoundContent={null}
+              style={{width: '70%'}}
+              onChange={this.selectContact}
+            >
+              {searchMap}
+            </Select>
             <MyList >
               {contactMap}
             </MyList>
