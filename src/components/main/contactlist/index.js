@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import styled from 'react-emotion';
 import PropTypes from 'prop-types';
-import Delete from '@material-ui/icons/Delete';
 import AddContactButton from './AddContactButton';
-import Modal from '@material-ui/core/Modal';
+import { Modal, Icon, Popconfirm } from 'antd';
 import AddContact from './AddContact';
 import ViewContact from './ViewContact';
 
@@ -12,7 +11,7 @@ const Container = styled('div')`
 `;
 
 const MyList = styled('div')`
-  width: 50%;
+  width: 75%;
   margin: 0.5em auto !important;
 `;
 
@@ -30,10 +29,10 @@ const AddButton = styled('div')`
   right: 1em;
 `;
 
-const TrashCan = styled(Delete)`
+const TrashCan = styled(Icon)`
   position: relative;
   right: 0.7em;
-  top: 0.25em;
+  top: 0.45em;
   float: right;
   color: red;
   transition: transform .1s;
@@ -42,36 +41,6 @@ const TrashCan = styled(Delete)`
     transform: scale(1.1);
   }
 
-`;
-
-const ModalStyle = styled('div')`
-  top: 50%;
-  left: 50%;
-  position: fixed;
-  transform: translate(-50%, -50%);
-  background-color: #fff;
-  box-shadow: 2px 2px 10px;
-  width: 50%;
-  height: 70%;
-  font-size: 26px;
-
-  @media only screen and (max-width: 1024px) {
-    width: 70%;
-    height: 80%;
-    font-size: 22px;
-  }
-`;
-
-const ModalHeader = styled('div')`
-  height: 3em;
-  background-color: #97C34D;
-  color: #343826;
-`;
-
-const ModalHeaderText = styled('span')`
-  position: relative;
-  top: 0.9em;
-  left: 1.8em;
 `;
 
 const sortFirstName = (a,b) => {
@@ -150,11 +119,13 @@ class ContactList extends Component {
         <MyListItem key={idx}>
           <div
             onClick={() => this.setContactDetail(contact)}
-            style={{width: '100%', height: '100%', display: 'inline'}}
+            style={{width: '72em', height: '2em', position: 'fixed'}}
             >
-              <span style={{position: 'relative', top: '0.4em', left: '0.4em', float: 'left'}}>{contact.FirstName} {contact.LastName}</span>
+              <span style={{position: 'relative', top: '0.2em', left: '0.4em', float: 'left'}}>{contact.FirstName} {contact.LastName}</span>
           </div>
-          <TrashCan onClick={() => this.removeContact(contact)}/>
+          <Popconfirm title="Are you sure delete this contact?" onConfirm={() => this.removeContact(contact)} okText="Yes" cancelText="No">
+            <TrashCan type="delete"/>
+          </Popconfirm>
         </MyListItem>
       );
     });
@@ -172,20 +143,26 @@ class ContactList extends Component {
               />
             </AddButton>
             <Modal
-              open={this.state.addContactModalVis}
-              onClose={this.changeContactModalVis}
+              title='Add Contact'
+              visible={this.state.addContactModalVis}
+              onCancel={this.changeContactModalVis}
+              footer={null}
+              style={{
+                maxWidth: '80%',
+                overflow: 'auto',
+                position: 'relative',
+                margin: 'auto',
+              }}
+              bodyStyle={{
+                padding: 8,
+              }}
             >
-              <ModalStyle>
-                <ModalHeader>
-                  <ModalHeaderText>Add Contact</ModalHeaderText>
-                </ModalHeader>
-                <AddContact
-                  closeModal={this.changeContactModalVis}
-                  user={user}
-                  firestoreDB={firestoreDB}
-                  reQueryContact={this.reQueryContacts}
-                />
-              </ModalStyle>
+              <AddContact
+                closeModal={this.changeContactModalVis}
+                user={user}
+                firestoreDB={firestoreDB}
+                reQueryContact={this.reQueryContacts}
+              />
             </Modal>
             <ViewContact
               contactDetail={this.state.contactDetail}

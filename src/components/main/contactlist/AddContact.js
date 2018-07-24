@@ -26,7 +26,7 @@ const MyAddButton = styled('button')`
   transition-duration: 0.2s;
 
   &:hover {
-    background-color: rgba(52, 56, 38, 0.8);
+    background-color: rgba(85, 92, 62, 1);
   }
 
   &:after {
@@ -81,7 +81,18 @@ const FeedbackText = styled('div')`
 const ItemLabel = styled('label')`
   display: inline-block;
   margin-right: 0.5em;
-  font-size: 18px;
+
+  @media only screen and (min-width: 1024px) {
+    font-size: 18px;
+  }
+
+  @media only screen and (min-width: 1366px) {
+    font-size: 20px;
+  }
+
+  @media only screen and (max-width: 760px) {
+    font-size: 14px;
+  }
 `;
 
 const ItemContainer = styled('div')`
@@ -328,7 +339,7 @@ const MyInnerForm = ({ props, closeModal }) => {
           touched.Notes && <FeedbackText className="input-feedback">{errors.Notes}</FeedbackText>}
         </ItemContainer>
       </div>
-      <div style={{position: 'absolute', bottom: '0.5em', right: '0.5em'}}>
+      <div style={{position: 'relative', textAlign: 'right', marginTop: '0.6em'}}>
         <MyCloseButton type="button"
         onClick={closeModal}
         >

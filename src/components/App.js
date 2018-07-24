@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'react-emotion';
 import MainApp from './main';
 import { Login, Register } from './authentication';
+import 'antd/dist/antd.css';
 
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
@@ -11,11 +12,11 @@ const AppContainer = styled('div')`
   text-align: center;
 
   @media only screen and (min-width: 1024px) {
-    font-size: 18px;
+    font-size: 20px;
   }
 
   @media only screen and (min-width: 1366px) {
-    font-size: 20px;
+    font-size: 22px;
   }
 
   @media only screen and (max-width: 760px) {
