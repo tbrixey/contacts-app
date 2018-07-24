@@ -2,6 +2,19 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import TextField from '@material-ui/core/TextField';
 import firebase from 'firebase';
+import styled from 'react-emotion';
+
+const LoginPage = styled('div')`
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 26em;
+  height: 12em;
+  margin-top: -9em;
+  margin-left: -13em;
+  border: 1px solid #ccc;
+  background-color: #f3f3f3;
+`;
 
 class Login extends Component {
   constructor(props) {
@@ -41,9 +54,15 @@ class Login extends Component {
 
   render() {
     return (
-      <div>
-        <form onSubmit={this.onFormSubmit}>
-          <div>
+      <LoginPage>
+        <form
+          onSubmit={this.onFormSubmit}
+          style={{
+            position: 'relative',
+            top: '2em',
+          }}
+        >
+          <div style={{marginBottom: '0.5em'}}>
             <label>Email Address:
             <TextField
               autoFocus
@@ -53,7 +72,7 @@ class Login extends Component {
             />
             </label>
           </div>
-          <div>
+          <div style={{marginBottom: '0.5em'}}>
             <label>Password:
             <TextField
               value={this.state.pass}
@@ -65,11 +84,11 @@ class Login extends Component {
           </div>
 
           <div>
-            <button type='submit' value='submit'>Log in!</button>
+            <button type='submit' value='submit' style={{marginRight: '0.2em'}}>Log in!</button>
             <Link to='/register'><button>Register</button></Link>
           </div>
         </form>
-      </div>
+      </LoginPage>
     );
   }
 
