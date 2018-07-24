@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import styled from 'react-emotion';
-import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-const MyLinks = styled(Link)`
+const SignIn = styled('div')`
   text-decoration: none;
   color: #343826;
 `;
@@ -40,7 +39,7 @@ class MainHeader extends Component {
             {
               user.email
               ? <SignOutText onClick={signOut}>{user.email} (Sign Out)</SignOutText>
-              : <MyLinks to='/login'><div>Login/Register</div></MyLinks>
+              : <SignIn>Please Sign In or Register to continue</SignIn>
             }
           </div>
         </div>

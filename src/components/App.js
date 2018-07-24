@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'react-emotion';
 import MainApp from './main';
-import { Login, Register } from './authentication';
 import 'antd/dist/antd.css';
 
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
@@ -30,8 +29,6 @@ const App = () => {
       <Router>
         <Switch>
           <Route path="/" exact component={MainApp} />
-          <Route path="/login" component={Login} />
-          <Route path="/register" component={Register} />
         </Switch>
       </Router>
     </AppContainer>
