@@ -1,12 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'react-emotion';
-import Grid from '@material-ui/core/Grid';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-
-const MyGrid = styled(Grid)`
-  padding: 0 !important;
-`;
 
 const MyLinks = styled(Link)`
   text-decoration: none;
@@ -39,20 +34,16 @@ class MainHeader extends Component {
     const { user, signOut } = this.props;
     return (
       <Header>
-        <h1 style={{ margin: '0.2em 0 0.6em' }}>Contacts</h1>
-        <Grid container spacing={24}>
-          <MyGrid item xs={2}>
-          </MyGrid>
-          <MyGrid item xs={8}>
+        <h1 style={{ margin: '0.2em 0 0' }}>Contacts</h1>
+        <div>
+          <div>
             {
               user.email
               ? <SignOutText onClick={signOut}>{user.email} (Sign Out)</SignOutText>
               : <MyLinks to='/login'><div>Login/Register</div></MyLinks>
             }
-          </MyGrid>
-          <MyGrid item xs={2}>
-          </MyGrid>
-        </Grid>
+          </div>
+        </div>
       </Header>
     );
   }
