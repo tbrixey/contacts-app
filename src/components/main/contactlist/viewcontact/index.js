@@ -95,24 +95,31 @@ class ViewContact extends Component {
     if (this.state.isEdit) {
       // save edit
       let values = this.state.contactDetail;
-      let newWorkPhoneNumber = values.WorkPhoneNumber.toString().replace(/(\d{3})(\d{3})(\d{4})/, '($1)-$2-$3');
-      let newCellPhoneNumber = values.CellPhoneNumber.toString().replace(/(\d{3})(\d{3})(\d{4})/, '($1)-$2-$3');
-      values.WorkPhoneNumber = newWorkPhoneNumber;
-      values.CellPhoneNumber = newCellPhoneNumber;
+      if (values.FirstName === '') {
+        alert('First Name required!');
+      } else {
+        let newWorkPhoneNumber = values.WorkPhoneNumber.toString().replace(/(\d{3})(\d{3})(\d{4})/, '($1)-$2-$3');
+        let newCellPhoneNumber = values.CellPhoneNumber.toString().replace(/(\d{3})(\d{3})(\d{4})/, '($1)-$2-$3');
+        values.WorkPhoneNumber = newWorkPhoneNumber;
+        values.CellPhoneNumber = newCellPhoneNumber;
 
-      this.setState({contactDetail: values});
+        this.setState({contactDetail: values});
 
-      let docRef = this.props.firestoreDB.collection('users').doc(this.props.user.uid).collection('contactlist').doc(values.docId);
-      docRef.update(values)
-      .then(() => {
+        let docRef = this.props.firestoreDB.collection('users').doc(this.props.user.uid).collection('contactlist').doc(values.docId);
+        docRef.update(values)
+        .then(() => {
           // console.log('Document successfully written!');
           this.props.reQueryContacts();
-      })
-      .catch((error) => {
+        })
+        .catch((error) => {
           // console.error('Error writing document: ', error);
-      });
+        });
+        this.setState({isEdit: !this.state.isEdit});
+      }
+
+    } else {
+      this.setState({isEdit: !this.state.isEdit});
     }
-    this.setState({isEdit: !this.state.isEdit});
   }
 
   componentDidMount() {
