@@ -1,19 +1,64 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import TextField from '@material-ui/core/TextField';
 import firebase from 'firebase';
 import styled from 'react-emotion';
+import PropTypes from 'prop-types';
+
+const SignInButton = styled('button')`
+  width: 5.0em;
+  height: 2.5em;
+  background-color: #343826;
+  color: white;
+  box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.2),0px 2px 2px 0px rgba(0, 0, 0, 0.14),0px 3px 1px -2px rgba(0, 0, 0, 0.12);
+  border: none;
+  text-align: center;
+  display: inline-block;
+  border-radius: 6px;
+  font-weight: 600;
+  text-transform: uppercase;
+  cursor: pointer;
+  overflow: hidden;
+  text-decoration: none;
+  position: relative;
+
+  -webkit-transition-duration: 0.2s;
+  transition-duration: 0.2s;
+
+  &:hover {
+    background-color: rgba(85, 92, 62, 1);
+  }
+`;
 
 const LoginPage = styled('div')`
   position: absolute;
   left: 50%;
   top: 50%;
   width: 26em;
-  height: 12em;
-  margin-top: -9em;
+  height: 14em;
+  margin-top: -8em;
   margin-left: -13em;
   border: 1px solid #ccc;
   background-color: #f3f3f3;
+`;
+
+const ClickDiv = styled('div')`
+  @media only screen and (min-width: 1024px) {
+    font-size: 16px;
+  }
+
+  @media only screen and (min-width: 1366px) {
+    font-size: 18px;
+  }
+
+  @media only screen and (max-width: 760px) {
+    font-size: 12px;
+  }
+`;
+
+const ClickHere = styled('span')`
+  text-decoration: underline;
+  color: #97C34D;
+  cursor: pointer;
 `;
 
 class Login extends Component {
@@ -23,16 +68,6 @@ class Login extends Component {
       email: '',
       pass: '',
     };
-  }
-
-  // Once user logins the auth state should change.
-  // This ensures that they get redirected.
-  componentDidMount() {
-    firebase.auth().onAuthStateChanged(function(user) {
-      if (user) {
-        window.location.href = '/';
-      }
-    });
   }
 
   handleChange = e => {
@@ -63,30 +98,35 @@ class Login extends Component {
           }}
         >
           <div style={{marginBottom: '0.5em'}}>
-            <label>Email Address:
             <TextField
               autoFocus
               id='email'
+              placeholder='Email Address'
               value={this.state.email}
               onChange={this.handleChange}
+              style={{marginLeft: '0.5em'}}
             />
-            </label>
           </div>
           <div style={{marginBottom: '0.5em'}}>
-            <label>Password:
             <TextField
               value={this.state.pass}
               onChange={this.handleChange}
+              placeholder='Password'
               id='pass'
               type='password'
+              style={{marginLeft: '0.5em'}}
             />
-            </label>
           </div>
 
           <div>
-            <button type='submit' value='submit' style={{marginRight: '0.2em'}}>Log in!</button>
-            <Link to='/register'><button>Register</button></Link>
+            <SignInButton type='submit' value='submit' style={{marginRight: '0.2em'}}>Sign in</SignInButton>
           </div>
+          <ClickDiv style={{marginTop: '0.25em'}}>
+            If you don&apos;t have an account click <ClickHere onClick={this.props.changeIsRegister}>here</ClickHere> to register
+          </ClickDiv>
+          <ClickDiv style={{marginTop: '0.25em'}}>
+            <ClickHere>Forgot password?</ClickHere>
+          </ClickDiv>
         </form>
       </LoginPage>
     );
@@ -95,3 +135,7 @@ class Login extends Component {
 }
 
 export default Login;
+
+Login.propTypes = {
+  changeIsRegister: PropTypes.func,
+};
