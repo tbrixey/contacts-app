@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import styled from 'react-emotion';
 import PropTypes from 'prop-types';
 import AddContactButton from './AddContactButton';
-import { Modal, Icon, Popconfirm, Select } from 'antd';
+import { Modal, Select } from 'antd';
 import AddContact from './AddContact';
-import ViewContact from './ViewContact';
-import { Login, Register } from '../authentication'
+import ViewContact from './viewcontact';
+import { Login, Register } from '../authentication';
 
 const Option = Select.Option;
 
@@ -14,12 +14,10 @@ const Container = styled('div')`
 `;
 
 const MyList = styled('div')`
-  width: 75%;
-  margin: 0.5em auto !important;
+  margin-top: 0.5em;
 `;
 
 const MyListItem = styled('div')`
-  padding: 0;
   height: 2em;
   &:hover {
     background-color: rgba(125, 125, 125, 0.1)
@@ -30,20 +28,6 @@ const AddButton = styled('div')`
   position: fixed;
   bottom: 1em;
   right: 1em;
-`;
-
-const TrashCan = styled(Icon)`
-  position: relative;
-  right: 0.7em;
-  top: 0.45em;
-  float: right;
-  color: red;
-  transition: transform .1s;
-
-  &:hover {
-    transform: scale(1.1);
-  }
-
 `;
 
 const sortFirstName = (a,b) => {
@@ -99,6 +83,7 @@ class ContactList extends Component {
     const docRef = this.props.firestoreDB.collection('users').doc(this.props.user.uid).collection('contactlist').doc(contact.docId);
     docRef.delete().then(() => {
       console.log('Gone forever!');
+      this.changeContactDetailModalVis();
       this.reQueryContacts();
     }).catch((error) => {
       console.error('error removing document: ', error);
@@ -141,13 +126,10 @@ class ContactList extends Component {
         <MyListItem key={idx}>
           <div
             onClick={() => this.setContactDetail(contact)}
-            style={{width: '72em', height: '2em', position: 'fixed'}}
+            style={{height: '2em', width: '100%'}}
             >
-              <span style={{position: 'relative', top: '0.2em', left: '0.4em', float: 'left'}}>{contact.FirstName} {contact.LastName}</span>
+              <span style={{float: 'left', marginLeft: '4em'}}>{contact.FirstName} {contact.LastName}</span>
           </div>
-          <Popconfirm title="Are you sure delete this contact?" onConfirm={() => this.removeContact(contact)} okText="Yes" cancelText="No">
-            <TrashCan type="delete"/>
-          </Popconfirm>
         </MyListItem>
       );
     });
@@ -162,7 +144,7 @@ class ContactList extends Component {
       <Container>
         { this.state.userAuthed
           ?
-          <div>
+          <div style={{height: '100%'}}>
             <label>Search for contact:
             <Select
               showSearch
@@ -190,6 +172,7 @@ class ContactList extends Component {
               visible={this.state.addContactModalVis}
               onCancel={this.changeContactModalVis}
               footer={null}
+              destroyOnClose={true}
               style={{
                 maxWidth: '80%',
                 overflow: 'auto',
@@ -211,6 +194,7 @@ class ContactList extends Component {
               contactDetail={this.state.contactDetail}
               viewContactModal={this.state.viewContactModal}
               changeContactDetailModalVis={this.changeContactDetailModalVis}
+              removeContact={(contact) => this.removeContact(contact)}
             />
           </div>
           :
