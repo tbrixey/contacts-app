@@ -387,12 +387,12 @@ const AddContact = ({ closeModal, user, firestoreDB, reQueryContact }) => {
           values.CellPhoneNumber = newCellPhoneNumber;
           firestoreDB.collection('users').doc(user.uid).collection('contactlist').add(values)
           .then(function(docRef) {
-              console.log('Document successfully written!', docRef.id);
+              // console.log('Document successfully written!', docRef.id);
               reQueryContact();
               closeModal();
           })
           .catch(function(error) {
-              console.error('Error writing document: ', error);
+              // console.error('Error writing document: ', error);
           });
           actions.setSubmitting(false);
         }, 1000);
