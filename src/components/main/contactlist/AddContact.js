@@ -360,7 +360,7 @@ const AddContact = ({ closeModal, user, firestoreDB, reQueryContact }) => {
   return (
     <Formik
       validationSchema={Yup.object().shape({
-            FirstName: Yup.string(),
+            FirstName: Yup.string().required(),
             LastName: Yup.string(),
           })}
       initialValues={{
