@@ -88,7 +88,7 @@ class Login extends Component {
   }
 
   resetPassword = () => {
-    let email = prompt('Enter your email to send forgotten password');
+    let email = prompt('Enter your email to send password reset link');
     firebase.auth().sendPasswordResetEmail(email).then(function() {
       // Email sent.
       alert('Email sent');
