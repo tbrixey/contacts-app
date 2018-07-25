@@ -195,6 +195,9 @@ class ContactList extends Component {
               viewContactModal={this.state.viewContactModal}
               changeContactDetailModalVis={this.changeContactDetailModalVis}
               removeContact={(contact) => this.removeContact(contact)}
+              firestoreDB={firestoreDB}
+              user={user}
+              reQueryContacts={this.reQueryContacts}
             />
           </div>
           :

@@ -94,7 +94,23 @@ class ViewContact extends Component {
   changeEditMode = () => {
     if (this.state.isEdit) {
       // save edit
-      console.log(this.state.contactDetail);
+      let values = this.state.contactDetail;
+      let newWorkPhoneNumber = values.WorkPhoneNumber.toString().replace(/(\d{3})(\d{3})(\d{4})/, '($1)-$2-$3');
+      let newCellPhoneNumber = values.CellPhoneNumber.toString().replace(/(\d{3})(\d{3})(\d{4})/, '($1)-$2-$3');
+      values.WorkPhoneNumber = newWorkPhoneNumber;
+      values.CellPhoneNumber = newCellPhoneNumber;
+
+      this.setState({contactDetail: values});
+
+      let docRef = this.props.firestoreDB.collection('users').doc(this.props.user.uid).collection('contactlist').doc(values.docId);
+      docRef.update(values)
+      .then(() => {
+          // console.log('Document successfully written!');
+          this.props.reQueryContacts();
+      })
+      .catch((error) => {
+          // console.error('Error writing document: ', error);
+      });
     }
     this.setState({isEdit: !this.state.isEdit});
   }
@@ -109,6 +125,11 @@ class ViewContact extends Component {
     }
   }
 
+  cancelModal = () => {
+    this.setState({isEdit: false});
+    this.props.changeContactDetailModalVis();
+  }
+
   handleChange = (e) => {
     let editDetail = this.state.contactDetail;
     editDetail[e.target.id] = e.target.value;
@@ -116,12 +137,12 @@ class ViewContact extends Component {
   }
 
   render() {
-    const {viewContactModal, changeContactDetailModalVis, contactDetail, removeContact} = this.props;
+    const {viewContactModal, contactDetail, removeContact} = this.props;
     return (
       <Modal
         closable={false}
         visible={viewContactModal}
-        onCancel={changeContactDetailModalVis}
+        onCancel={this.cancelModal}
         footer={null}
         destroyOnClose={true}
         style={{
@@ -149,7 +170,7 @@ class ViewContact extends Component {
           : <ContactDetails contactDetail={contactDetail}/> }
           <div style={{position: 'relative', textAlign: 'right', marginTop: '0.6em', fontSize: 14}}>
             <MyCloseButton type="button"
-              onClick={changeContactDetailModalVis}
+              onClick={this.cancelModal}
             >
               Close
             </MyCloseButton>
@@ -171,4 +192,7 @@ ViewContact.propTypes = {
   changeContactDetailModalVis: PropTypes.func,
   contactDetail: PropTypes.object,
   removeContact: PropTypes.func,
+  firestoreDB: PropTypes.object,
+  user: PropTypes.object,
+  reQueryContacts: PropTypes.func,
 };
