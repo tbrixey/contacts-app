@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import TextField from '@material-ui/core/TextField';
-import firebase from 'firebase';
 import styled from 'react-emotion';
 import PropTypes from 'prop-types';
+import firebase from 'firebase';
 
 const SignInButton = styled('button')`
   width: 5.0em;
@@ -87,6 +87,18 @@ class Login extends Component {
     });
   }
 
+  resetPassword = () => {
+    let email = prompt('Enter your email to send forgotten password');
+    firebase.auth().sendPasswordResetEmail(email).then(function() {
+      // Email sent.
+      alert('Email sent');
+    }).catch(function(error) {
+      // An error happened.
+      alert(error);
+    });
+
+  }
+
   render() {
     return (
       <LoginPage>
@@ -125,7 +137,7 @@ class Login extends Component {
             If you don&apos;t have an account click <ClickHere onClick={this.props.changeIsRegister}>here</ClickHere> to register
           </ClickDiv>
           <ClickDiv style={{marginTop: '0.25em'}}>
-            <ClickHere>Forgot password?</ClickHere>
+            <ClickHere onClick={this.resetPassword}>Forgot password?</ClickHere>
           </ClickDiv>
         </form>
       </LoginPage>
