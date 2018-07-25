@@ -5,6 +5,7 @@ import AddContactButton from './AddContactButton';
 import { Modal, Icon, Popconfirm, Select } from 'antd';
 import AddContact from './AddContact';
 import ViewContact from './ViewContact';
+import { Login, Register } from '../authentication'
 
 const Option = Select.Option;
 
@@ -62,6 +63,7 @@ class ContactList extends Component {
       addContactModalVis: false,
       viewContactModal: false,
       userAuthed: false,
+      isRegister: false,
     };
   }
 
@@ -128,6 +130,10 @@ class ContactList extends Component {
     this.changeContactDetailModalVis();
   }
 
+  changeIsRegister = () => {
+    this.setState({isRegister: !this.state.isRegister});
+  }
+
   render() {
     const { user, firestoreDB } = this.props;
     const contactMap = this.state.contactList.map((contact, idx) => {
@@ -157,7 +163,7 @@ class ContactList extends Component {
         { this.state.userAuthed
           ?
           <div>
-            <label>Search for contact: </label>
+            <label>Search for contact:
             <Select
               showSearch
               value={null}
@@ -165,11 +171,12 @@ class ContactList extends Component {
               showArrow={false}
               filterOption={(input, option) => option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
               notFoundContent={null}
-              style={{width: '70%'}}
+              style={{width: '65%', marginLeft: '0.5em'}}
               onChange={this.selectContact}
             >
               {searchMap}
             </Select>
+            </label>
             <MyList >
               {contactMap}
             </MyList>
@@ -208,7 +215,9 @@ class ContactList extends Component {
           </div>
           :
           <div style={{ marginTop: '10em' }}>
-            Please login to see your contacts!
+            { this.state.isRegister ?
+              <Register changeIsRegister={this.changeIsRegister} />
+            : <Login changeIsRegister={this.changeIsRegister} />}
           </div>
         }
       </Container>
