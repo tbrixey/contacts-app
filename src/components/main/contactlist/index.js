@@ -31,9 +31,9 @@ const AddButton = styled('div')`
 `;
 
 const sortFirstName = (a,b) => {
-  if (a.FirstName > b.FirstName)
+  if (a.FirstName.toLowerCase() > b.FirstName.toLowerCase())
     return 1;
-  if (a.FirstName < b.FirstName)
+  if (a.FirstName.toLowerCase() < b.FirstName.toLowerCase())
     return -1;
   return 0;
 };
