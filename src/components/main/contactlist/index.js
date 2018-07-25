@@ -126,9 +126,9 @@ class ContactList extends Component {
         <MyListItem key={idx}>
           <div
             onClick={() => this.setContactDetail(contact)}
-            style={{height: '2em', width: '100%'}}
+            style={{height: '2em', width: '100%', cursor: 'context-menu'}}
             >
-              <span style={{float: 'left', marginLeft: '4em'}}>{contact.FirstName} {contact.LastName}</span>
+              <span style={{float: 'left', marginLeft: '2em', marginTop: '0.2em'}}>{contact.FirstName} {contact.LastName}</span>
           </div>
         </MyListItem>
       );

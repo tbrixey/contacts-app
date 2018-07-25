@@ -2,10 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const ContactDetails = ({contactDetail}) => (
-  <div>{contactDetail.NickName ? <div>
-    <span>Nick Name: </span>{contactDetail.NickName}
-  </div> : null }
-  {contactDetail.FirstName ? <div>
+  <div>{contactDetail.FirstName ? <div>
     <span>First Name: </span>{contactDetail.FirstName}
   </div> : null }
   {contactDetail.MiddleName ? <div>
@@ -13,6 +10,9 @@ const ContactDetails = ({contactDetail}) => (
   </div> : null }
   {contactDetail.LastName ? <div>
     <span>Last Name: </span>{contactDetail.LastName}
+  </div> : null }
+  {contactDetail.NickName ? <div>
+    <span>Nick Name: </span>{contactDetail.NickName}
   </div> : null }
   {contactDetail.EmailAddress ? <div>
     <span>Email Address: </span>{contactDetail.EmailAddress}

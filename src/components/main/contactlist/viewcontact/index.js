@@ -145,6 +145,7 @@ class ViewContact extends Component {
         onCancel={this.cancelModal}
         footer={null}
         destroyOnClose={true}
+        title='Contact Details'
         style={{
           maxWidth: '90%',
           overflow: 'auto',

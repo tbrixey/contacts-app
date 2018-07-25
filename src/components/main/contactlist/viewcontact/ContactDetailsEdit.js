@@ -5,16 +5,6 @@ import TextField from '@material-ui/core/TextField';
 const ContactDetailsEdit = ({contactDetail, handleChange}) => (
   <div>
     <div>
-      <span>Nick Name: </span>
-      <TextField
-        id="NickName"
-        placeholder="Nickname"
-        type="text"
-        value={contactDetail.NickName}
-        onChange={handleChange}
-      />
-    </div>
-    <div>
       <span>First Name: </span>
       <TextField
         id="FirstName"
@@ -41,6 +31,16 @@ const ContactDetailsEdit = ({contactDetail, handleChange}) => (
         placeholder="Last Name"
         type="text"
         value={contactDetail.LastName}
+        onChange={handleChange}
+      />
+    </div>
+    <div>
+      <span>Nick Name: </span>
+      <TextField
+        id="NickName"
+        placeholder="Nickname"
+        type="text"
+        value={contactDetail.NickName}
         onChange={handleChange}
       />
     </div>
