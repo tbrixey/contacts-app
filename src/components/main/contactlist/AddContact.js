@@ -387,22 +387,20 @@ const AddContact = ({ closeModal, user, firestoreDB, reQueryContact }) => {
         Notes: '',
       }}
       onSubmit={(values, actions) => {
-        setTimeout(() => {
-          let newWorkPhoneNumber = values.WorkPhoneNumber.toString().replace(/(\d{3})(\d{3})(\d{4})/, '($1)-$2-$3');
-          let newCellPhoneNumber = values.CellPhoneNumber.toString().replace(/(\d{3})(\d{3})(\d{4})/, '($1)-$2-$3');
-          values.WorkPhoneNumber = newWorkPhoneNumber;
-          values.CellPhoneNumber = newCellPhoneNumber;
-          firestoreDB.collection('users').doc(user.uid).collection('contactlist').add(values)
-          .then(function(docRef) {
-              // console.log('Document successfully written!', docRef.id);
-              reQueryContact();
-              closeModal();
-          })
-          .catch(function(error) {
-              // console.error('Error writing document: ', error);
-          });
-          actions.setSubmitting(false);
-        }, 1000);
+        let newWorkPhoneNumber = values.WorkPhoneNumber.toString().replace(/(\d{3})(\d{3})(\d{4})/, '($1)-$2-$3');
+        let newCellPhoneNumber = values.CellPhoneNumber.toString().replace(/(\d{3})(\d{3})(\d{4})/, '($1)-$2-$3');
+        values.WorkPhoneNumber = newWorkPhoneNumber;
+        values.CellPhoneNumber = newCellPhoneNumber;
+        firestoreDB.collection('users').doc(user.uid).collection('contactlist').add(values)
+        .then((docRef) => {
+            // console.log('Document successfully written!', docRef.id);
+            reQueryContact();
+            closeModal();
+            actions.setSubmitting(false);
+        })
+        .catch((error) => {
+            // console.error('Error writing document: ', error);
+        });
       }}
       render={props => (
         <MyInnerForm

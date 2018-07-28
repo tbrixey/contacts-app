@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import styled from 'react-emotion';
 import PropTypes from 'prop-types';
 import AddContactButton from './AddContactButton';
-import { Modal, Select } from 'antd';
+import { Modal, Select, Avatar } from 'antd';
 import AddContact from './AddContact';
 import ViewContact from './viewcontact';
 import { Login, Register } from '../authentication';
@@ -128,7 +128,12 @@ class ContactList extends Component {
             onClick={() => this.setContactDetail(contact)}
             style={{height: '2em', width: '100%', cursor: 'context-menu'}}
             >
-              <span style={{float: 'left', marginLeft: '2em', marginTop: '0.2em'}}>{contact.FirstName} {contact.LastName}</span>
+              <span style={{float: 'left', marginLeft: '1em', marginTop: '0.2em'}}>
+                <Avatar style={{ backgroundColor: '#97C34D', verticalAlign: 'middle', marginRight: '0.5em' }} size="small">
+                  {contact.FirstName.substring(0, 1).toUpperCase()}
+                </Avatar>
+                {contact.FirstName} {contact.LastName}
+              </span>
           </div>
         </MyListItem>
       );
