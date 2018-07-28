@@ -346,7 +346,19 @@ const MyInnerForm = ({ props, closeModal }) => {
           </Panel>
         </Collapse>
       </div>
-      <div style={{position: 'relative', textAlign: 'right', marginTop: '0.6em'}}>
+      <div className={css`
+        @media only screen and (min-width: 1024px) {
+          font-size: 16px;
+        }
+
+        @media only screen and (min-width: 1366px) {
+          font-size: 18px;
+        }
+
+        @media only screen and (max-width: 760px) {
+          font-size: 12px;
+        }
+      `} style={{position: 'relative', textAlign: 'right', marginTop: '0.6em'}}>
         <MyCloseButton type="button"
         onClick={closeModal}
         >

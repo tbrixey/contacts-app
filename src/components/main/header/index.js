@@ -9,7 +9,7 @@ const SignIn = styled('div')`
 
 const Header = styled('div')`
   background-color: #97C34D;
-  height: 5em;
+  height: 4.5em;
   width: 100%;
   color: #343826;
   display: inline-block;
