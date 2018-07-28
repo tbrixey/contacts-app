@@ -2,8 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'react-emotion';
 import { Formik } from 'formik';
+import { Collapse } from 'antd';
 import TextField from '@material-ui/core/TextField';
 import * as Yup from 'yup';
+
+const Panel = Collapse.Panel;
 
 const MyAddButton = styled('button')`
   width: 5.5em;
@@ -163,20 +166,20 @@ const MyInnerForm = ({ props, closeModal }) => {
           touched.LastName && <FeedbackText className="input-feedback">{errors.LastName}</FeedbackText>}
         </ItemContainer>
         <ItemContainer>
-          <ItemLabel htmlFor="WorkPhoneNumber">
-            Work Number:
+          <ItemLabel htmlFor="EmailAddress">
+            Email Address:
           </ItemLabel>
           <TextField
-            id="WorkPhoneNumber"
-            placeholder="1234567890"
-            type="number"
-            value={(values.WorkPhoneNumber)}
+            id="EmailAddress"
+            placeholder="Email Address"
+            type="text"
+            value={values.EmailAddress}
             onChange={handleChange}
             onBlur={handleBlur}
-            className={errors.WorkPhoneNumber && touched.WorkPhoneNumber ? 'text-input error' : 'text-input'}
+            className={errors.EmailAddress && touched.EmailAddress ? 'text-input error' : 'text-input'}
           />
-          {errors.WorkPhoneNumber &&
-          touched.WorkPhoneNumber && <FeedbackText className="input-feedback">{errors.WorkPhoneNumber}</FeedbackText>}
+          {errors.EmailAddress &&
+          touched.EmailAddress && <FeedbackText className="input-feedback">{errors.EmailAddress}</FeedbackText>}
         </ItemContainer>
         <ItemContainer>
           <ItemLabel htmlFor="CellPhoneNumber">
@@ -194,150 +197,154 @@ const MyInnerForm = ({ props, closeModal }) => {
           {errors.CellPhoneNumber &&
           touched.CellPhoneNumber && <FeedbackText className="input-feedback">{errors.CellPhoneNumber}</FeedbackText>}
         </ItemContainer>
-        <ItemContainer>
-          <ItemLabel htmlFor="EmailAddress">
-            Email Address:
-          </ItemLabel>
-          <TextField
-            id="EmailAddress"
-            placeholder="Email Address"
-            type="text"
-            value={values.EmailAddress}
-            onChange={handleChange}
-            onBlur={handleBlur}
-            className={errors.EmailAddress && touched.EmailAddress ? 'text-input error' : 'text-input'}
-          />
-          {errors.EmailAddress &&
-          touched.EmailAddress && <FeedbackText className="input-feedback">{errors.EmailAddress}</FeedbackText>}
-        </ItemContainer>
-        <ItemContainer>
-          <ItemLabel htmlFor="Nickname">
-            Nickname:
-          </ItemLabel>
-          <TextField
-            id="Nickname"
-            placeholder="Nickname"
-            type="text"
-            value={values.Nickname}
-            onChange={handleChange}
-            onBlur={handleBlur}
-            className={errors.Nickname && touched.Nickname ? 'text-input error' : 'text-input'}
-          />
-          {errors.Nickname &&
-          touched.Nickname && <FeedbackText className="input-feedback">{errors.Nickname}</FeedbackText>}
-        </ItemContainer>
-        <ItemContainer>
-          <ItemLabel htmlFor="StreetAddress">
-            Street Address:
-          </ItemLabel>
-          <TextField
-            id="StreetAddress"
-            placeholder="Street Address"
-            type="text"
-            value={values.StreetAddress}
-            onChange={handleChange}
-            onBlur={handleBlur}
-            className={errors.StreetAddress && touched.StreetAddress ? 'text-input error' : 'text-input'}
-          />
-          {errors.StreetAddress &&
-          touched.StreetAddress && <FeedbackText className="input-feedback">{errors.StreetAddress}</FeedbackText>}
-        </ItemContainer>
-        <ItemContainer>
-          <ItemLabel htmlFor="StreetAddressTwo">
-            Street Address line 2:
-          </ItemLabel>
-          <TextField
-            id="StreetAddressTwo"
-            placeholder="Street Address line 2"
-            type="text"
-            value={values.StreetAddressTwo}
-            onChange={handleChange}
-            onBlur={handleBlur}
-            className={errors.StreetAddressTwo && touched.StreetAddressTwo ? 'text-input error' : 'text-input'}
-          />
-          {errors.StreetAddressTwo &&
-          touched.StreetAddressTwo && <FeedbackText className="input-feedback">{errors.StreetAddressTwo}</FeedbackText>}
-        </ItemContainer>
-        <ItemContainer>
-          <ItemLabel htmlFor="City">
-            City:
-          </ItemLabel>
-          <TextField
-            id="City"
-            placeholder="City"
-            type="text"
-            value={values.City}
-            onChange={handleChange}
-            onBlur={handleBlur}
-            className={errors.City && touched.City ? 'text-input error' : 'text-input'}
-          />
-          {errors.City &&
-          touched.City && <FeedbackText className="input-feedback">{errors.City}</FeedbackText>}
-        </ItemContainer>
-        <ItemContainer>
-          <ItemLabel htmlFor="State">
-            State:
-          </ItemLabel>
-          <TextField
-            id="State"
-            placeholder="State"
-            type="text"
-            value={values.State}
-            onChange={handleChange}
-            onBlur={handleBlur}
-            className={errors.State && touched.State ? 'text-input error' : 'text-input'}
-          />
-          {errors.State &&
-          touched.State && <FeedbackText className="input-feedback">{errors.State}</FeedbackText>}
-        </ItemContainer>
-        <ItemContainer>
-          <ItemLabel htmlFor="ZIPCode">
-            ZIP Code:
-          </ItemLabel>
-          <TextField
-            id="ZIPCode"
-            placeholder="ZIP Code"
-            type="text"
-            value={values.ZIPCode}
-            onChange={handleChange}
-            onBlur={handleBlur}
-            className={errors.ZIPCode && touched.ZIPCode ? 'text-input error' : 'text-input'}
-          />
-          {errors.ZIPCode &&
-          touched.ZIPCode && <FeedbackText className="input-feedback">{errors.ZIPCode}</FeedbackText>}
-        </ItemContainer>
-        <ItemContainer>
-          <ItemLabel htmlFor="POBox">
-            PO Box:
-          </ItemLabel>
-          <TextField
-            id="POBox"
-            placeholder="PO Box"
-            type="text"
-            value={values.POBox}
-            onChange={handleChange}
-            onBlur={handleBlur}
-            className={errors.POBox && touched.POBox ? 'text-input error' : 'text-input'}
-          />
-          {errors.POBox &&
-          touched.POBox && <FeedbackText className="input-feedback">{errors.POBox}</FeedbackText>}
-        </ItemContainer>
-        <ItemContainer>
-          <ItemLabel htmlFor="Notes">
-            Notes:
-          </ItemLabel>
-          <TextField
-            id="Notes"
-            placeholder="Notes"
-            type="text"
-            value={values.Notes}
-            onChange={handleChange}
-            onBlur={handleBlur}
-            className={errors.Notes && touched.Notes ? 'text-input error' : 'text-input'}
-          />
-          {errors.Notes &&
-          touched.Notes && <FeedbackText className="input-feedback">{errors.Notes}</FeedbackText>}
-        </ItemContainer>
+        <Collapse bordered={false}>
+          <Panel header="More info" key="1">
+            <ItemContainer>
+              <ItemLabel htmlFor="WorkPhoneNumber">
+                Work Number:
+              </ItemLabel>
+              <TextField
+                id="WorkPhoneNumber"
+                placeholder="1234567890"
+                type="number"
+                value={(values.WorkPhoneNumber)}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                className={errors.WorkPhoneNumber && touched.WorkPhoneNumber ? 'text-input error' : 'text-input'}
+              />
+              {errors.WorkPhoneNumber &&
+              touched.WorkPhoneNumber && <FeedbackText className="input-feedback">{errors.WorkPhoneNumber}</FeedbackText>}
+            </ItemContainer>
+            <ItemContainer>
+              <ItemLabel htmlFor="Nickname">
+                Nickname:
+              </ItemLabel>
+              <TextField
+                id="Nickname"
+                placeholder="Nickname"
+                type="text"
+                value={values.Nickname}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                className={errors.Nickname && touched.Nickname ? 'text-input error' : 'text-input'}
+              />
+              {errors.Nickname &&
+              touched.Nickname && <FeedbackText className="input-feedback">{errors.Nickname}</FeedbackText>}
+            </ItemContainer>
+            <ItemContainer>
+              <ItemLabel htmlFor="StreetAddress">
+                Street Address:
+              </ItemLabel>
+              <TextField
+                id="StreetAddress"
+                placeholder="Street Address"
+                type="text"
+                value={values.StreetAddress}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                className={errors.StreetAddress && touched.StreetAddress ? 'text-input error' : 'text-input'}
+              />
+              {errors.StreetAddress &&
+              touched.StreetAddress && <FeedbackText className="input-feedback">{errors.StreetAddress}</FeedbackText>}
+            </ItemContainer>
+            <ItemContainer>
+              <ItemLabel htmlFor="StreetAddressTwo">
+                Street Address line 2:
+              </ItemLabel>
+              <TextField
+                id="StreetAddressTwo"
+                placeholder="Street Address line 2"
+                type="text"
+                value={values.StreetAddressTwo}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                className={errors.StreetAddressTwo && touched.StreetAddressTwo ? 'text-input error' : 'text-input'}
+              />
+              {errors.StreetAddressTwo &&
+              touched.StreetAddressTwo && <FeedbackText className="input-feedback">{errors.StreetAddressTwo}</FeedbackText>}
+            </ItemContainer>
+            <ItemContainer>
+              <ItemLabel htmlFor="City">
+                City:
+              </ItemLabel>
+              <TextField
+                id="City"
+                placeholder="City"
+                type="text"
+                value={values.City}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                className={errors.City && touched.City ? 'text-input error' : 'text-input'}
+              />
+              {errors.City &&
+              touched.City && <FeedbackText className="input-feedback">{errors.City}</FeedbackText>}
+            </ItemContainer>
+            <ItemContainer>
+              <ItemLabel htmlFor="State">
+                State:
+              </ItemLabel>
+              <TextField
+                id="State"
+                placeholder="State"
+                type="text"
+                value={values.State}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                className={errors.State && touched.State ? 'text-input error' : 'text-input'}
+              />
+              {errors.State &&
+              touched.State && <FeedbackText className="input-feedback">{errors.State}</FeedbackText>}
+            </ItemContainer>
+            <ItemContainer>
+              <ItemLabel htmlFor="ZIPCode">
+                ZIP Code:
+              </ItemLabel>
+              <TextField
+                id="ZIPCode"
+                placeholder="ZIP Code"
+                type="text"
+                value={values.ZIPCode}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                className={errors.ZIPCode && touched.ZIPCode ? 'text-input error' : 'text-input'}
+              />
+              {errors.ZIPCode &&
+              touched.ZIPCode && <FeedbackText className="input-feedback">{errors.ZIPCode}</FeedbackText>}
+            </ItemContainer>
+            <ItemContainer>
+              <ItemLabel htmlFor="POBox">
+                PO Box:
+              </ItemLabel>
+              <TextField
+                id="POBox"
+                placeholder="PO Box"
+                type="text"
+                value={values.POBox}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                className={errors.POBox && touched.POBox ? 'text-input error' : 'text-input'}
+              />
+              {errors.POBox &&
+              touched.POBox && <FeedbackText className="input-feedback">{errors.POBox}</FeedbackText>}
+            </ItemContainer>
+            <ItemContainer>
+              <ItemLabel htmlFor="Notes">
+                Notes:
+              </ItemLabel>
+              <TextField
+                id="Notes"
+                placeholder="Notes"
+                type="text"
+                value={values.Notes}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                className={errors.Notes && touched.Notes ? 'text-input error' : 'text-input'}
+              />
+              {errors.Notes &&
+              touched.Notes && <FeedbackText className="input-feedback">{errors.Notes}</FeedbackText>}
+            </ItemContainer>
+          </Panel>
+        </Collapse>
       </div>
       <div style={{position: 'relative', textAlign: 'right', marginTop: '0.6em'}}>
         <MyCloseButton type="button"
@@ -380,22 +387,20 @@ const AddContact = ({ closeModal, user, firestoreDB, reQueryContact }) => {
         Notes: '',
       }}
       onSubmit={(values, actions) => {
-        setTimeout(() => {
-          let newWorkPhoneNumber = values.WorkPhoneNumber.toString().replace(/(\d{3})(\d{3})(\d{4})/, '($1)-$2-$3');
-          let newCellPhoneNumber = values.CellPhoneNumber.toString().replace(/(\d{3})(\d{3})(\d{4})/, '($1)-$2-$3');
-          values.WorkPhoneNumber = newWorkPhoneNumber;
-          values.CellPhoneNumber = newCellPhoneNumber;
-          firestoreDB.collection('users').doc(user.uid).collection('contactlist').add(values)
-          .then(function(docRef) {
-              // console.log('Document successfully written!', docRef.id);
-              reQueryContact();
-              closeModal();
-          })
-          .catch(function(error) {
-              // console.error('Error writing document: ', error);
-          });
-          actions.setSubmitting(false);
-        }, 1000);
+        let newWorkPhoneNumber = values.WorkPhoneNumber.toString().replace(/(\d{3})(\d{3})(\d{4})/, '($1)-$2-$3');
+        let newCellPhoneNumber = values.CellPhoneNumber.toString().replace(/(\d{3})(\d{3})(\d{4})/, '($1)-$2-$3');
+        values.WorkPhoneNumber = newWorkPhoneNumber;
+        values.CellPhoneNumber = newCellPhoneNumber;
+        firestoreDB.collection('users').doc(user.uid).collection('contactlist').add(values)
+        .then((docRef) => {
+            // console.log('Document successfully written!', docRef.id);
+            reQueryContact();
+            closeModal();
+            actions.setSubmitting(false);
+        })
+        .catch((error) => {
+            // console.error('Error writing document: ', error);
+        });
       }}
       render={props => (
         <MyInnerForm
