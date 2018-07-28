@@ -199,7 +199,6 @@ const MyInnerForm = ({ props, closeModal }) => {
         </ItemContainer>
         <Collapse bordered={false}>
           <Panel header="More info" key="1">
-
             <ItemContainer>
               <ItemLabel htmlFor="WorkPhoneNumber">
                 Work Number:
